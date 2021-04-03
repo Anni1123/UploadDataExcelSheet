@@ -38,13 +38,14 @@ import java.util.UUID;
 public class MainActivity extends AppCompatActivity {
     //initialising the cellcount as 2
     public static final int cellCount=2;
-    Button excel;
+    Button excel,view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         excel=findViewById(R.id.excel);
+        view=findViewById(R.id.showall);
         //click on excel to select a file
         excel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},101);
                 }
+            }
+        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ShowAllImagesFromStorage.class));
             }
         });
     }
@@ -69,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this,"Permission Not granted",Toast.LENGTH_LONG).show();
             }
         }
-
     }
     private void selectfile(){
         //select the file from the file storage
